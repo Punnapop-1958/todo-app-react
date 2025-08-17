@@ -1,0 +1,187 @@
+.wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 900px;
+    background: #fffdf6;
+    padding: 0px 18px 0px 18px;
+    box-shadow: 5px 5px #0000009f;
+}
+
+/* ==================== TodoList ==================== */
+.todo-list-container {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.todo-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.todo-list-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.todo-list-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.todo-list {
+    display: flex;
+    color: #000000;
+    font-weight: 700;
+    border: solid 2px;
+    border-radius: 8px;
+    padding: 12px 18px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    transition: box-shadow 0.1s, transform 0.1s;
+}
+
+.todo-list:hover {
+    box-shadow: 4px 4px #555;
+}
+
+.todo-list:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px #555;
+}
+
+.list-item {
+    display: flex;
+    gap: 1rem;
+}
+
+.list-item [type=checkbox] {
+    width: 2rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 2px solid #000000;
+    cursor: pointer;
+    position: relative;
+    /* ต้องมีเพื่อให้ ::after เป็น absolute */
+    transition: background 0.2s, border 0.2s;
+}
+
+.list-item [type=checkbox]:hover {
+    border-color: #FFD55B;
+}
+
+.list-item [type=checkbox]:checked {
+    background-color: #FFD55B;
+    border-color: #FFD55B;
+}
+
+/* ติ๊กถูก */
+.list-item [type=checkbox]::after {
+    content: "";
+    position: absolute;
+    width: 0.9rem;
+    height: 0.4rem;
+    border-left: 3px solid #000000;
+    border-bottom: 3px solid #000000;
+    transform: translate(-50%, -70%) rotate(-45deg);
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.list-item [type=checkbox]:checked::after {
+    opacity: 1;
+}
+
+.list-action {
+    display: flex;
+    font-size: 2rem;
+    gap: 1rem;
+}
+
+/* ==================== TodoForm ==================== */
+.todo-form {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px auto;
+}
+
+/* Input */
+.todo-form input[type=text] {
+    width: 18rem;
+    height: 2.5rem;
+    border-radius: 12px;
+    border: none;
+    background: #00000023;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    outline: none;
+}
+
+/* ปุ่ม + */
+.todo-form .btn-add {
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #FFD55B;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s, box-shadow 0.1s, transform 0.1s;
+}
+
+.todo-form .btn-add:hover {
+    background-color: #FFC107;
+    box-shadow: 3px 3px #555;
+}
+
+.todo-form .btn-add:active {
+    background-color: #FFC107;
+    transform: translate(1.5px, 1.5px);
+    box-shadow: 1.5px 1.5px #555;
+}
+
+/* ==================== TodoShow==================== */
+
+.todo-show {
+    display: flex;
+    justify-content: center;
+    /* width: fit-content; */
+    margin: 20px auto;
+    padding: 24px 48px;
+    border: solid #000;
+    border-radius: 12px;
+    gap: 20px;
+}
+
+.todo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.circle-count {
+    border: solid #000;
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-count h1 {
+    font-size: 48px;
+}
