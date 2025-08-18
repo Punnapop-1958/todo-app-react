@@ -40,7 +40,12 @@ const TodoApp = () => {
         editTodo={editTodo}
         setEditTodo={setEditTodo}
       />
-      <TodoList todos={todos} onDelete={handleDelete} onEdit={setEditTodo} />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        onDelete={handleDelete}
+        onEdit={setEditTodo}
+      />
     </div>
   );
 };

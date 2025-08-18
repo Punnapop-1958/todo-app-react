@@ -1,8 +1,9 @@
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { updateTodo } from "../api/todoApi.js";
 
-const TodoList = ({ todos, onDelete, onEdit }) => {
+const TodoList = ({ todos, onDelete, onEdit, setTodos }) => {
   // Delete
   const handleDeleteClick = (id) => {
     Swal.fire({
@@ -30,8 +31,34 @@ const TodoList = ({ todos, onDelete, onEdit }) => {
     onEdit(todo);
   };
 
+  // Checked Done
+  const handleToggleDone = async (todo) => {
+    // อัปเดตทันที
+    setTodos((prevTodos) =>
+      prevTodos.map((t) => (t.id === todo.id ? { ...t, done: !t.done } : t))
+    );
+
+    try {
+      const updatedTodo = await updateTodo({ id: todo.id, done: !todo.done });
+
+      setTodos((prevTodos) =>
+        prevTodos.map((t) =>
+          t.id === todo.id ? { ...t, done: updatedTodo.done } : t
+        )
+      );
+    } catch (err) {
+      console.error("Error updating todo:", err);
+
+      // ถ้า backend ล้มเหลว rollback
+      setTodos((prevTodos) =>
+        prevTodos.map((t) => (t.id === todo.id ? { ...t, done: todo.done } : t))
+      );
+    }
+  };
+
   return (
     <div className="todo-list-container">
+      {/* if no data */}
       {todos.length === 0 ? (
         <div
           className="todo-list"
@@ -40,10 +67,15 @@ const TodoList = ({ todos, onDelete, onEdit }) => {
           <p>No todos yet. Please add some!</p>
         </div>
       ) : (
+        // if found data
         todos.map((todo) => (
           <div className="todo-list" key={todo.id}>
             <div className="list-item">
-              <input type="checkbox" checked={todo.done} readOnly />
+              <input
+                type="checkbox"
+                checked={todo.done}
+                onChange={() => handleToggleDone(todo)}
+              />
               <h2
                 style={{
                   textDecoration: todo.done ? "line-through" : "none",

@@ -44,16 +44,24 @@ export const deleteTodo = async (req, res) => {
 };
 
 export const updateTodo = async (req, res) => {
-  const { id, text } = req.body;
+  const { id, text, done } = req.body;
   try {
-    const sql = "update todos set text = $1 where id = $2 RETURNING *";
-    const result = await pool.query(sql, [text, id]);
+    let result;
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: "Todo not found" });
-    } else {
-      res.status(200).json(result.rows[0]);
+    // ถ้ามีค่า done (รวมทั้ง false)
+    if (done !== undefined) {
+      const sql = "UPDATE todos SET done = $1 WHERE id = $2 RETURNING *";
+      result = await pool.query(sql, [done, id]);
+    } else if (text !== undefined) {
+      const sql = "UPDATE todos SET text = $1 WHERE id = $2 RETURNING *";
+      result = await pool.query(sql, [text, id]);
     }
+
+    if (!result || result.rows.length === 0) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+
+    res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error("Error updating todo: ", err);
     res.status(500).json({ error: err.message });
