@@ -1,14 +1,10 @@
-import TodoShow from "./components/TodoShow";
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
 import "./App.css";
+import TodoApp from "./components/TodoApp";
 
 const App = () => {
   return (
     <div className="wrapper">
-      <TodoShow />
-      <TodoForm />
-      <TodoList />
+      <TodoApp />
     </div>
   );
 };

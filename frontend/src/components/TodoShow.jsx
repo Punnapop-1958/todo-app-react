@@ -1,20 +1,4 @@
-import { useEffect, useState } from "react";
-import { getTodos } from "../api/todoApi.js";
-const TodoShow = () => {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const fetchTodoCount = async () => {
-      try {
-        const data = await getTodos();
-        setTodos(data);
-      } catch (err) {
-        console.error("Error fetching data: ", err);
-      }
-    };
-    fetchTodoCount();
-  }, []);
-
+const TodoShow = ({ todos, setTodos }) => {
   const todoDoneCount = todos.filter((todo) => todo.done).length;
 
   return (

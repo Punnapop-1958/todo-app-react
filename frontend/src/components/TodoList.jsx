@@ -1,22 +1,34 @@
-import { useState, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
-import { getTodos } from "../api/todoApi.js";
+import Swal from "sweetalert2";
 
-const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTodos();
-        setTodos(data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
+const TodoList = ({ todos, onDelete, onEdit }) => {
+  // Delete
+  const handleDeleteClick = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+        onDelete(id);
       }
-    };
-    fetchData();
-  }, []);
+    });
+  };
+
+  // Edit
+  const handleEditClick = (todo) => {
+    onEdit(todo);
+  };
 
   return (
     <div className="todo-list-container">
@@ -42,8 +54,14 @@ const TodoList = () => {
               </h2>
             </div>
             <div className="list-action">
-              <FiEdit />
-              <MdOutlineDelete />
+              <FiEdit
+                className="btn-action"
+                onClick={() => handleEditClick(todo)}
+              />
+              <MdOutlineDelete
+                className="btn-action"
+                onClick={() => handleDeleteClick(todo.id)}
+              />
             </div>
           </div>
         ))

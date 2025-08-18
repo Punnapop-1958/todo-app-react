@@ -104,6 +104,15 @@
     gap: 1rem;
 }
 
+.btn-action {
+    cursor: pointer;
+    transition: filter 0.1s;
+}
+
+.btn-action:hover {
+    filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
 /* ==================== TodoForm ==================== */
 .todo-form {
     display: flex;
@@ -151,6 +160,71 @@
     background-color: #FFC107;
     transform: translate(1.5px, 1.5px);
     box-shadow: 1.5px 1.5px #555;
+}
+
+/* ปรับ input ตอน edit */
+.input-editing {
+    border: 2px solid #FFD55B !important;
+    background: #fff3cd !important;
+    color: #000;
+}
+
+/* กลุ่มปุ่ม */
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ปุ่ม Update */
+.todo-form .btn-edit {
+    border-radius: 12px;
+    padding: 0 14px;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #ffd55b;
+    color: #000;
+    transition: background 0.1s, box-shadow 0.1s, transform 0.1s;
+}
+
+.todo-form .btn-edit:hover {
+    background-color: #ffc107;
+    box-shadow: 3px 3px #555;
+}
+
+.todo-form .btn-edit:active {
+    background-color: #ffc107;
+    transform: translate(1.5px, 1.5px);
+    box-shadow: 1.5px 1.5px #555;
+}
+
+/* ปุ่ม Cancel */
+.todo-form .btn-cancel {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    color: #dc3545;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 0.2s, transform 0.1s;
+}
+
+.todo-form .btn-cancel:hover {
+    color: #a71d2a;
+    transform: scale(1.15);
+}
+
+.todo-form .btn-cancel:active {
+    transform: scale(0.95);
 }
 
 /* ==================== TodoShow==================== */
