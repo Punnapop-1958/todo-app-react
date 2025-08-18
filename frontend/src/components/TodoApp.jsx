@@ -7,6 +7,7 @@ import { deleteTodo, getTodos } from "../api/todoApi.js";
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
   const [editTodo, setEditTodo] = useState(null);
+  const [editingTodoId, setEditingTodoId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +30,16 @@ const TodoApp = () => {
     }
   };
 
+  const handleEdit = (todo) => {
+    setEditTodo(todo);
+    setEditingTodoId(todo.id);
+  };
+
+  const handleCancelEdit = () => {
+    setEditTodo(null);
+    setEditingTodoId(null);
+  };
+
   console.log(editTodo);
 
   return (
@@ -39,12 +50,15 @@ const TodoApp = () => {
         setTodos={setTodos}
         editTodo={editTodo}
         setEditTodo={setEditTodo}
+        setEditingTodoId={setEditingTodoId}
+        cancelEdit={handleCancelEdit}
       />
       <TodoList
         todos={todos}
         setTodos={setTodos}
         onDelete={handleDelete}
-        onEdit={setEditTodo}
+        onEdit={handleEdit}
+        editingTodoId={editingTodoId}
       />
     </div>
   );

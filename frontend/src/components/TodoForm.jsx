@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createTodo, updateTodo } from "../api/todoApi.js";
 
-const TodoForm = ({ todos, setTodos, editTodo, setEditTodo }) => {
+const TodoForm = ({ todos, setTodos, editTodo, cancelEdit }) => {
   const [todoInput, setTodoInput] = useState("");
 
   useEffect(() => {
@@ -42,16 +42,16 @@ const TodoForm = ({ todos, setTodos, editTodo, setEditTodo }) => {
         )
       );
 
-      setEditTodo(null);
+      cancelEdit(); // reset editTodo + editingTodoId
       setTodoInput("");
     } catch (err) {
       console.error("Error updating todo: ", err);
     }
   };
 
-  const handleEditCancel = async () => {
+  const handleEditCancel = () => {
     setTodoInput("");
-    setEditTodo(null);
+    cancelEdit(); // reset ทั้ง editTodo และ editingTodoId ใน parent
   };
 
   return (

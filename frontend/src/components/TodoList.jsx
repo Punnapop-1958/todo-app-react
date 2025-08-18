@@ -3,7 +3,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import { updateTodo } from "../api/todoApi.js";
 
-const TodoList = ({ todos, onDelete, onEdit, setTodos }) => {
+const TodoList = ({ todos, onDelete, onEdit, setTodos, editingTodoId }) => {
   // Delete
   const handleDeleteClick = (id) => {
     Swal.fire({
@@ -69,7 +69,12 @@ const TodoList = ({ todos, onDelete, onEdit, setTodos }) => {
       ) : (
         // if found data
         todos.map((todo) => (
-          <div className="todo-list" key={todo.id}>
+          <div
+            className={`todo-list ${
+              todo.id === editingTodoId ? "editing" : ""
+            }`}
+            key={todo.id}
+          >
             <div className="list-item">
               <input
                 type="checkbox"

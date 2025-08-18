@@ -3,7 +3,7 @@ import { json } from "express";
 
 export const getTodos = async (req, res) => {
   try {
-    const sql = "select * from todos";
+    const sql = "select * from todos;";
     const result = await pool.query(sql);
     res.status(200).json(result.rows);
   } catch (err) {

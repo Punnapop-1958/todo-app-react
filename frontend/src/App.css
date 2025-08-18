@@ -52,6 +52,37 @@
     box-shadow: 2px 2px #555;
 }
 
+/* Animation ลอยขึ้นลงแบบนุ่มนวล */
+@keyframes float {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-0.5deg);
+    }
+
+    50% {
+        transform: rotate(0.5deg);
+    }
+
+    75% {
+        transform: rotate(-0.5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.todo-list.editing {
+    animation: float 0.8s ease-in-out infinite;
+    border-color: #FFD55B;
+    box-shadow: 0 4px 4px rgba(255, 213, 91, 0.7);
+    /* box-shadow: 4px 4px #555; */
+}
+
+
 .list-item {
     display: flex;
     gap: 1rem;
@@ -112,6 +143,7 @@
 .btn-action:hover {
     filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
 }
+
 
 /* ==================== TodoForm ==================== */
 .todo-form {
