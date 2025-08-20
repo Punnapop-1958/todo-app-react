@@ -22,5 +22,5 @@ app.use("/api", todoRoute);
 
 app.listen(port, (e) => {
   if (e) console.log("Error in server setup", e);
-  console.log(`Server is running on port: ${port} >> http://localhost:${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
